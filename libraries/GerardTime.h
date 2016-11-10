@@ -9,7 +9,6 @@
 #define TIMEZONE_HRS (+1 * SECS_PER_HOUR)
 #define TIMEZONE_MIN (+0 * SECS_PER_MINUTE)
 
-#define ALL_DAY -1
 #define MONDAY 4
 #define TUESDAY 5
 #define WEDNESDAY 6
