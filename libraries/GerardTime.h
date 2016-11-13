@@ -41,7 +41,7 @@ public:
         addRepeat(id, SECS_PER_DAY, toSecond(hrs, min, sec), listener);
     }
 	
-	static void alarmRepeat(uint8_t id, int8_t day, uint8_t hrs, uint8_t min, uint8_t sec, AlarmListener listener)
+	static void alarmRepeat(uint8_t id, time_t day, uint8_t hrs, uint8_t min, uint8_t sec, AlarmListener listener)
     {
         addRepeat(id, SECS_PER_WEEK, day + toSecond(hrs, min, sec), listener);
     }
