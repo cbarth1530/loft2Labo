@@ -8,14 +8,15 @@
 
 #define TIMEZONE_HRS (+1 * SECS_PER_HOUR)
 #define TIMEZONE_MIN (+0 * SECS_PER_MINUTE)
+#define TIMEZONE_FULL TIMEZONE_HRS + TIMEZONE_MIN
 
-#define MONDAY 4
-#define TUESDAY 5
-#define WEDNESDAY 6
-#define THURSDAY 0
-#define FRIDAY 1
-#define SATURDAY 2
-#define SUNDAY 3
+#define MONDAY (4 * SECS_PER_DAY)
+#define TUESDAY (5 * SECS_PER_DAY)
+#define WEDNESDAY (6 * SECS_PER_DAY)
+#define THURSDAY (0 * SECS_PER_DAY)
+#define FRIDAY (1 * SECS_PER_DAY)
+#define SATURDAY (2 * SECS_PER_DAY)
+#define SUNDAY (3 * SECS_PER_DAY)
 
 #define MAX_PROCESSES 2
 
@@ -42,7 +43,7 @@ public:
     
     static void alarmRepeat(uint8_t id, int8_t day, uint8_t hrs, uint8_t min, uint8_t sec, AlarmListener listener)
     {
-        addRepeat(id, SECS_PER_WEEK, day * toSecond(hrs, min, sec), listener);
+        addRepeat(id, SECS_PER_WEEK, day + toSecond(hrs, min, sec), listener);
     }
 	
 	static void timerRepeat(int8_t id, time_t seconds, AlarmListener listener)
@@ -82,7 +83,7 @@ private:
 	static void addRepeat(uint8_t id, time_t interval, time_t sec, AlarmListener listener)
     {
         time_t tnow = now();
-        time_t time = tnow / interval * interval + sec - TIMEZONE_HRS - TIMEZONE_MIN;
+        time_t time = tnow / interval * interval + sec - TIMEZONE_FULL;
         if (time <= tnow) time += interval;
 		
 		Process proc = { id, interval, time, listener };
